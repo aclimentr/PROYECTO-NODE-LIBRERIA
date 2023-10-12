@@ -6,8 +6,8 @@ const userSchema = new Schema({
     email: { type: String, required: true },
     password: { type: String, required: true },
     role: { type: String, default: "user", enum: ["admin", "user"] },
-    book: [{type: Schema.ObjectId, ref: "book"}],
-    library: [{type: Schema.ObjectId, ref: "library"}],
+    //book: [{type: Schema.ObjectId, ref: "book"}],
+    //library: [{type: Schema.ObjectId, ref: "library"}],
 
 
 }, {

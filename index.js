@@ -13,6 +13,11 @@ app.use(express.json());
 
 //CLOUDINARY
 
+cloudinary.config({
+    cloud_name: 'dwsybemgr',
+    api_key: '353886285931718',
+    api_secret: '6709uKDfGeOExgLKvAj1DxCCqpw'
+});
 
 connectDb()
 

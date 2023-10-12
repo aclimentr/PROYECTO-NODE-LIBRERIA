@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 
 //URL DB
-
+const url = "mongodb+srv://cesarfcasale:f25a03cg@cluster0.wshtjkz.mongodb.net/proyectoNodeLibrary?retryWrites=true&w=majority";
 
 const connectDb = async ()=>{
     try {
