@@ -11,13 +11,7 @@ const cloudinary = require("cloudinary").v2;
 const app = express();
 app.use(express.json());
 
-cloudinary.config({
-    cloud_name: 'dwsybemgr',
-    api_key: '353886285931718',
-    api_secret: '6709uKDfGeOExgLKvAj1DxCCqpw'
-});
-
-
+//cloudinary
 connectDb()
 
 app.use("/book", routeBook);
