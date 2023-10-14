@@ -1,12 +1,8 @@
 const mongoose = require("mongoose")
 
-
-const url = "mongodb+srv://cesarfcasale:f25a03cg@cluster0.wshtjkz.mongodb.net/proyectoNodeLibrary?retryWrites=true&w=majority";
-
-
 const connectDb = async ()=>{
     try {
-        const db = await mongoose.connect(url, {
+        const db = await mongoose.connect(process.env.DB_URL, {
             useNewUrlParser : true,
             useUnifiedTopology : true
         })

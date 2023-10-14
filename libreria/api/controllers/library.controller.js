@@ -1,6 +1,6 @@
 const Library = require("../models/library.model");
 
-//get
+
 const getLibrary = async(req, res) => {
     try {
         const allLibrary = await Library.find();
@@ -9,7 +9,7 @@ const getLibrary = async(req, res) => {
         return res.status(500).json(error)
     }
 };
-//post
+
 const addLibrary = async (req, res) =>{
     try {
     const newLibrary = new Library(req.body);
@@ -19,7 +19,7 @@ const addLibrary = async (req, res) =>{
         
     }
 }
-//put
+
 const putLibrary =async (req, res) => {
     try {
         const { id } = req.params;
@@ -33,14 +33,16 @@ const putLibrary =async (req, res) => {
         return res.status(500).json(error)
     }
 };
-//delete
+
 const deleteLibrary = async (req, res) => {
     try {
         const { id } = req.params;
         const deleteLibrary = await Library.findByIdAndDelete(id);
+        
         return res.status(200).json(deleteLibrary)
-    } catch (error) {
+    } catch (error) {        
         return res.status(500).json(error)
+       
     }
 }
 module.exports = {getLibrary, addLibrary, putLibrary, deleteLibrary}
