@@ -1,7 +1,7 @@
 const express = require("express")
 
 const { register, login, profile } = require("../controllers/user.controller");
-const { isAuth } = require("../../../middleware/auth");
+const { isAuth } = require("../../../middleware/auth"); 
 
 const route = express.Router()
 

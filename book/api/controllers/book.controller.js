@@ -1,6 +1,18 @@
 const Book = require("../models/book.model");
+//post
+const newBook = async (req, res) => {
+    try {
+        const body = req.body;
+        const book = new Book(body);       
 
-//get Book
+       
+        const createdBook = await book.save();
+        return res.json(createdBook)
+    } catch (error) {
+        return res.json(error)
+    }
+}
+//get allbooks
 const getBook = async(req, res) => {
     try {
         const allBook = await Book.find();
@@ -9,7 +21,7 @@ const getBook = async(req, res) => {
         return res.status(500).json(error)
     }
 };
-//get Book by id
+//byId
 const getBookById = async (req, res) => {
     try {
         const {id} = req.params;
@@ -22,7 +34,7 @@ const getBookById = async (req, res) => {
         return res.status(500).json(error);
     }
 };
-//by title
+//byTitle
 const getBookByTitle = async (req, res) => {
     try {
         const {title} = req.params;
@@ -35,7 +47,7 @@ const getBookByTitle = async (req, res) => {
         return res.status(500).json(error);
     }
 };
-//by type
+//byGenre
 const getBookByGenre = async (req, res)=>{
     try {
         const {type} = req.params;
@@ -48,8 +60,7 @@ const getBookByGenre = async (req, res)=>{
         return res.status(500).json(error);
     }
 };
-//byDate
-
+//byYear
 const getBookByYear = async (req, res) => {
     try {
         const { year } = req.params;
@@ -64,7 +75,6 @@ const getBookByYear = async (req, res) => {
         return res.status(500).json(error);
     }
 };
-
 //post
 const postBook = async(req, res) =>{
         try {
@@ -76,16 +86,18 @@ const postBook = async(req, res) =>{
         }
     };
 //put
+const putBook =async (req, res) => {
 
-const putBook = async (req, res) => {
     try {
         const { id } = req.params;
         const putBook = new Book(req.body);
         putBook._id = id;
-        const bookpath = req.file.path
+        const bookpath = req.file.pathyIdAndUpdate(id,{img:bookpath});
 
-        if (bookpath) {
-            const createdBook = await Book.findByIdAndUpdate(id,{img:bookpath});
+               
+        if (bookpath) {            
+            const createdBook = await Book.findByIdAndUpdate(id, {image:bookpath});
+
             console.log(bookpath)
             return res.json(createdBook)
         }
@@ -97,7 +109,6 @@ const putBook = async (req, res) => {
         return res.status(500).json(error);
     }
 };
-
 //delete
 const deleteBook = async (req, res) => {
     try {
@@ -109,5 +120,4 @@ const deleteBook = async (req, res) => {
         return res.status(500).json(error)
     }
 }
-module.exports = {getBook, getBookById, getBookByTitle, getBookByGenre, getBookByYear, postBook, putBook, deleteBook};
-
+module.exports = {newBook, getBook, getBookById, getBookByTitle, getBookByGenre, getBookByYear, postBook, putBook, deleteBook};

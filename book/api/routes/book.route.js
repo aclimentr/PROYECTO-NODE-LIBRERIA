@@ -1,9 +1,11 @@
 const express = require("express");
+
 const { isAdminAuth } = require("../../../middleware/adminAuth");
 const {getBook, postBook, getBookById, getBookByTitle, getBookByGenre, getBookByYear, putBook, deleteBook} = require("../controllers/book.controller")
 
 const route = express.Router()
 const upload = require("../../../middleware/upload.file");
+
 
 route.get("/", getBook)
 
@@ -16,6 +18,7 @@ route.get("/byType/:type", getBookByGenre)
 route.get("/byYear", getBookByYear)
 
 route.post("/uploadBook", [isAdminAuth], postBook)
+
 
 route.put("/updateBook/:id", [isAdminAuth], upload.single("img"), putBook)
 
