@@ -1,15 +1,29 @@
 
 const express = require('express');
 const {connectDb} = require("./util/database");
+const cloudinary = require("cloudinary").v2;
+
+app.use(express.json());
 const routeBook = require("./book/api/routes/book.route");
 const routeLibrary = require("./libreria/api/routes/library.route");
 const routeUser = require("./user/api/routes/user.route");
 const env = require("dotenv")
 env.config()
 
-const cloudinary = require("cloudinary").v2;
-const app = express();
-app.use(express.json());
+
+var cors = require('cors')
+var app = express()
+ 
+app.use(cors())
+ 
+app.get('/libreria/:id', function (req, res, next) {
+  res.json({msg: 'This is CORS-enabled for all origins!'})
+})
+ 
+app.listen(80, function () {
+  console.log('CORS-enabled web server listening on port 80')
+})
+
 
 
 
