@@ -1,7 +1,11 @@
 const User = require("../models/user.model");
+const { validateEmailDB, validatePassword } = require("../../../util/validator")
+const bycript = require("bcrypt")
+
 const { generateToken } = require("../../../util/jwt")
 const { validateEmailDB, validatePassword } = require("../../../util/validator");
 const bycript = require("bcrypt");
+
 
 
 const register = async (req, res) => {
@@ -30,7 +34,11 @@ const login = async (req, res) => {
             return res.json({ success: false, message: "Email no existe" })
         }
 
+        if (!bycript.compareSync(userInfo.password, userDB.password)) {
+
+
         if (!bycrypt.compareSync(userInfo.password, userDB.password)) {
+
             return res.json({ success: false, message: "La contraseña no coincide" })
         }
         //generar el token
