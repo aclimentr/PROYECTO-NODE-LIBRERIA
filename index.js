@@ -13,12 +13,24 @@ app.use(express.json());
 
 
 
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET
+});
+
+
+
+
+
+
 
 connectDb()
 
 app.use("/book", routeBook);
 app.use("/library", routeLibrary);
 app.use("/user", routeUser);
+
 
 const PORT = 5051;
 app.listen(PORT, ()=>{

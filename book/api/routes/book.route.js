@@ -1,22 +1,27 @@
 const express = require("express");
+
+const { isAdminAuth } = require("../../../middleware/adminAuth");
 const {getBook, postBook, getBookById, getBookByTitle, getBookByGenre, getBookByYear, putBook, deleteBook} = require("../controllers/book.controller")
 
 const route = express.Router()
+const upload = require("../../../middleware/upload.file");
+
 
 route.get("/", getBook)
 
-route.get("/id/:id", getBookById)
+route.get("/byId/:id", getBookById)
 
-route.get("/name/:name", getBookByTitle)
+route.get("/byName/:name", getBookByTitle)
 
-route.get("/type/:type", getBookByGenre)
+route.get("/byType/:type", getBookByGenre)
 
-route.get("/expireDate", getBookByYear)
+route.get("/byYear", getBookByYear)
 
-route.post("/uploadBook", postBook)
+route.post("/uploadBook", [isAdminAuth], postBook)
 
-route.put("/:id", putBook)
 
-route.delete("/:id", deleteBook)
+route.put("/updateBook/:id", [isAdminAuth], upload.single("img"), putBook)
+
+route.delete("/deleteBook/:id", [isAdminAuth], deleteBook)
 
 module.exports = route
