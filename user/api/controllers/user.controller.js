@@ -1,19 +1,18 @@
 const User = require("../models/user.model");
-const { validateEmailDB } = require("../../../util/validator")
-const bycript = require("bcrypt")
+const { validateEmailDB, validatePassword } = require("../../../util/validator")
+const bycrypt = require("bcrypt")
 
 
 const register = async (req, res) => {
     try {
-
         const userBody = new User(req.body)
         const valEmail = await validateEmailDB(req.body.email)
-        if (!valEmail) {
+        if (!valEmail) {            
             if (validatePassword(req.body.password)) {
                 userBody.password = bycrypt.hashSync(userBody.password, 10)
                 const createduser = await userBody.save();
                 return res.json({ success: true, message: "Agregado con exito", data: createduser })
-            } else {
+            } else {                
                 return res.json({ success: false, message: "La contraseña no cumple con el patron" })
             }
         }
@@ -29,6 +28,7 @@ const login = async (req, res) => {
         if (!userDB) {
             return res.json({ success: false, message: "Email no existe" })
         }
+        
         if (!bycrypt.compareSync(userInfo.password, userDB.password)) {
             return res.json({ success: false, message: "La contraseña no coincide" })
         }

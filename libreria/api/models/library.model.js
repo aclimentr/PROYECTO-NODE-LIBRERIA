@@ -4,14 +4,17 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const librarySchema = new Schema({
-    author: {type: String, required:true},
-    editorial: {type: String, required:true},
+    author: {type: String, required:true},    
     year: {type: Date},
-    book: [{type: Schema.ObjectId, ref: "book"}],
-    user: [{type: Schema.ObjectId, ref: "user"}],
+    book: {type: Schema.ObjectId, ref: "book"},
+    user: {type: Schema.ObjectId, ref: "user"},
+    // image: {type: String, default: ""},      
+    
 },{
+    
     timestamps:true, //genere una fecha de creacion y de mod auto.
     collection: "library"
+    
 });
 
 
