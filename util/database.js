@@ -2,10 +2,7 @@ const mongoose = require("mongoose")
 
 
 
-
-
-
-//url db
+const url = "mongodb+srv://alvaronero14:6967Dinosaurio10@cluster0.rxaew3s.mongodb.net/ProyectoNodeLibrary?retryWrites=true&w=majority&appName=AtlasApp";
 
 
 
