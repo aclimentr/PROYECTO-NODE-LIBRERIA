@@ -1,10 +1,9 @@
 const User = require("../models/user.model");
 const { validateEmailDB, validatePassword } = require("../../../util/validator")
-const bycript = require("bcrypt")
+const bycrypt = require("bcrypt")
 
 const { generateToken } = require("../../../util/jwt")
-const { validateEmailDB, validatePassword } = require("../../../util/validator");
-const bycript = require("bcrypt");
+
 
 
 
@@ -14,7 +13,7 @@ const register = async (req, res) => {
         const valEmail = await validateEmailDB(req.body.email)
         if (!valEmail) {            
             if (validatePassword(req.body.password)) {
-                userBody.password = bycript.hashSync(userBody.password, 10)
+                userBody.password = bycrypt.hashSync(userBody.password, 10)
                 const createduser = await userBody.save();
                 return res.json({ success: true, message: "Agregado con exito", data: createduser })
             } else {                
@@ -33,10 +32,6 @@ const login = async (req, res) => {
         if (!userDB) {
             return res.json({ success: false, message: "Email no existe" })
         }
-
-        if (!bycript.compareSync(userInfo.password, userDB.password)) {
-
-
         if (!bycrypt.compareSync(userInfo.password, userDB.password)) {
 
             return res.json({ success: false, message: "La contraseña no coincide" })

@@ -2,7 +2,7 @@
 const express = require('express');
 const {connectDb} = require("./util/database");
 const cloudinary = require("cloudinary").v2;
-
+var app = express()
 app.use(express.json());
 const routeBook = require("./book/api/routes/book.route");
 const routeLibrary = require("./libreria/api/routes/library.route");
@@ -12,7 +12,7 @@ env.config()
 
 
 var cors = require('cors')
-var app = express()
+
  
 app.use(cors())
  
@@ -23,6 +23,7 @@ app.get('/libreria/:id', function (req, res, next) {
 app.listen(80, function () {
   console.log('CORS-enabled web server listening on port 80')
 })
+
 
 
 
