@@ -5,8 +5,6 @@ const bycrypt = require("bcrypt")
 const { generateToken } = require("../../../util/jwt")
 
 
-
-
 const register = async (req, res) => {
     try {
         const userBody = new User(req.body)
@@ -31,7 +29,7 @@ const login = async (req, res) => {
         const userDB = await validateEmailDB(userInfo.email);
         if (!userDB) {
             return res.json({ success: false, message: "Email no existe" })
-        }
+
         if (!bycrypt.compareSync(userInfo.password, userDB.password)) {
 
             return res.json({ success: false, message: "La contraseña no coincide" })
