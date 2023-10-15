@@ -95,7 +95,7 @@ const putBook =async (req, res) => {
                
         if (bookpath) {            
             const createdBook = await Book.findByIdAndUpdate(id, {image:bookpath});
-            console.log(bookpath)
+            // console.log(bookpath)
             return res.json(createdBook)
         }
         const updateBook = await Book.findByIdAndUpdate(id, putBook, {

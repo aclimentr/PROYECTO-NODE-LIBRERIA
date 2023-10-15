@@ -11,14 +11,12 @@ const cloudinary = require("cloudinary").v2;
 const app = express();
 app.use(express.json());
 
-<<<<<<< HEAD
+
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.API_KEY,
     api_secret: process.env.API_SECRET
 });
-=======
->>>>>>> d23de55730da87d87b94145656d09614e403c528
 
 
 connectDb()
