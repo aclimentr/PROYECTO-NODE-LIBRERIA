@@ -1,6 +1,18 @@
 const Book = require("../models/book.model");
+//post
+const newBook = async (req, res) => {
+    try {
+        const body = req.body;
+        const book = new Book(body);       
 
-//get Book
+       
+        const createdBook = await book.save();
+        return res.json(createdBook)
+    } catch (error) {
+        return res.json(error)
+    }
+}
+//get allbooks
 const getBook = async(req, res) => {
     try {
         const allBook = await Book.find();
@@ -9,7 +21,7 @@ const getBook = async(req, res) => {
         return res.status(500).json(error)
     }
 };
-//get Book by id
+//byId
 const getBookById = async (req, res) => {
     try {
         const {id} = req.params;
@@ -22,7 +34,7 @@ const getBookById = async (req, res) => {
         return res.status(500).json(error);
     }
 };
-//by title
+//byTitle
 const getBookByTitle = async (req, res) => {
     try {
         const {title} = req.params;
@@ -35,7 +47,7 @@ const getBookByTitle = async (req, res) => {
         return res.status(500).json(error);
     }
 };
-//by type
+//byGenre
 const getBookByGenre = async (req, res)=>{
     try {
         const {type} = req.params;
@@ -48,17 +60,17 @@ const getBookByGenre = async (req, res)=>{
         return res.status(500).json(error);
     }
 };
-//expireDate
-const getBookByYear = async (req, res)=>{
+//byYear
+const getBookByYear = async (req, res) => {
     try {
-        const bookByYear = await Book.find({year})
-        if (!bookByYear){
-        return res.status(404).json({message: "there's no book from this year"})
-
-    } else{
-        return res.status(200).json(bookByYear)
-
-    }
+        const { year } = req.params;
+        const bookByYear = await Book.find({ year: { $gte: year } });
+        
+        if (bookByYear.length === 0) {
+            return res.status(404).json({ message: "No hay libros de este año o posteriores" });
+        } else {
+            return res.status(200).json(bookByYear);
+        }
     } catch (error) {
         return res.status(500).json(error);
     }
@@ -75,21 +87,32 @@ const postBook = async(req, res) =>{
     };
 //put
 const putBook =async (req, res) => {
+
     try {
         const { id } = req.params;
         const putBook = new Book(req.body);
         putBook._id = id;
+        const bookpath = req.file.pathyIdAndUpdate(id,{img:bookpath});
+
+               
+        if (bookpath) {            
+            const createdBook = await Book.findByIdAndUpdate(id, {image:bookpath});
+
+            console.log(bookpath)
+            return res.json(createdBook)
+        }
         const updateBook = await Book.findByIdAndUpdate(id, putBook, {
-            new:true,
+            new: true,
         });
-        return res.status(200).json(updateBook)
+        return res.status(200).json(updateBook);
     } catch (error) {
-        return res.status(500).json(error)
+        return res.status(500).json(error);
     }
 };
 //delete
 const deleteBook = async (req, res) => {
     try {
+        console.log("aqui estoy")
         const { id } = req.params;
         const deleteBook = await Book.findByIdAndDelete(id);
         return res.status(200).json(deleteBook)
@@ -97,4 +120,4 @@ const deleteBook = async (req, res) => {
         return res.status(500).json(error)
     }
 }
-module.exports = {getBook, getBookById, getBookByTitle, getBookByGenre, getBookByYear, postBook, putBook, deleteBook};
+module.exports = {newBook, getBook, getBookById, getBookByTitle, getBookByGenre, getBookByYear, postBook, putBook, deleteBook};

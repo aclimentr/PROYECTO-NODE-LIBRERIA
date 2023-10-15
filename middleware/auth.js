@@ -1,5 +1,5 @@
-const { verifyToken } = require("../util/jwt")
-const User = require("../user/api/models/user.model")
+const { verifyToken } = require("../util/jwt");
+const User = require("../user/api/models/user.model");
 
 const isAuth = async (req, res, next) => {
     try {
@@ -16,6 +16,7 @@ const isAuth = async (req, res, next) => {
         const userProfile = await User.findById(tokenVerified.id)
         req.userProfile = userProfile;
         next();
+        
 
     } catch (error) {
 
