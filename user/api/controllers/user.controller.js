@@ -1,4 +1,5 @@
 const User = require("../models/user.model");
+const { generateToken } = require("../../../util/jwt")
 const { validateEmailDB, validatePassword } = require("../../../util/validator");
 const bycript = require("bcrypt");
 
