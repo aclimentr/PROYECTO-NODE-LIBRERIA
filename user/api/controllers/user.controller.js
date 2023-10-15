@@ -1,12 +1,8 @@
 const User = require("../models/user.model");
 const { validateEmailDB, validatePassword } = require("../../../util/validator")
-const bycript = require("bcrypt")
+const bycrypt = require("bcrypt")
 
 const { generateToken } = require("../../../util/jwt")
-const { validateEmailDB, validatePassword } = require("../../../util/validator");
-const bycript = require("bcrypt");
-
-
 
 const register = async (req, res) => {
     try {
@@ -32,10 +28,7 @@ const login = async (req, res) => {
         const userDB = await validateEmailDB(userInfo.email);
         if (!userDB) {
             return res.json({ success: false, message: "Email no existe" })
-        }
-
-        if (!bycript.compareSync(userInfo.password, userDB.password)) {
-
+        }        
 
         if (!bycrypt.compareSync(userInfo.password, userDB.password)) {
 
