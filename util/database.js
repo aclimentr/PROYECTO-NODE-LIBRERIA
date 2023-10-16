@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 
 
 
-const url = "mongodb+srv://mcannio:user88@cluster0.ezw9phc.mongodb.net/proyectoNodeLibreria?retryWrites=true&w=majority";
+const url = "mongodb+srv://mcannio:user88@cluster0.ezw9phc.mongodb.net/proyectoNodeLibrary?retryWrites=true&w=majority";
 
 
 

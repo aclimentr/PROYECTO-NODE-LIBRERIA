@@ -2,13 +2,17 @@
 const express = require('express');
 const {connectDb} = require("./util/database");
 const cloudinary = require("cloudinary").v2;
-var app = express()
+
+const app = express()
+
+
 app.use(express.json());
 const routeBook = require("./book/api/routes/book.route");
 const routeLibrary = require("./libreria/api/routes/library.route");
 const routeUser = require("./user/api/routes/user.route");
 const env = require("dotenv")
 env.config()
+
 
 
 var cors = require('cors')

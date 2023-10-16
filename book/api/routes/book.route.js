@@ -20,7 +20,7 @@ route.get("/byYear", getBookByYear)
 route.post("/uploadBook", [isAdminAuth], postBook)
 
 
-route.put("/updateBook/:id", [isAdminAuth], upload.single("img"), putBook)
+route.put("/updateBook/:id", [isAdminAuth], upload.single("image"), putBook)
 
 route.delete("/deleteBook/:id", [isAdminAuth], deleteBook)
 
